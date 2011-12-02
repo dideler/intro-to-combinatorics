@@ -1,0 +1,111 @@
+\documentclass[10pt,a4paper,final]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+\author{Dennis Ideler}
+\title{MATH 2P71: Intro to Combinatorics\\Assignment 3: Binomial Coefficients}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item % Q1
+In how many ways can you distribute $n$ pennies to $k$ children
+if each child is supposed to get at least 5?\\
+\\
+LPV 3.4.1: The number of ways to distribute $n$ identical pennies to $k$ children so that each child gets at least
+one is $\binom{n-1k+k-1}{k-1} = \binom{n-1}{k-1}$.\\
+LPV 3.4.2: The number of ways to distribute $n$ identical pennies to $k$ children is $\binom{n+k-1}{k-1}$.\\
+\\
+If each child is supposed to get at least 5 pennies, then we can give each child 5 pennies
+first (i.e. a total of $5k$ pennies) to get rid of that constraint.
+Now we have to count how many ways we can distribute the remaining $n-5k$ pennies.
+Using theorem 3.4.2, we get $\binom{n-5k+k-1}{k-1} = \binom{n-4k-1}{k-1}$ ways.
+
+\item % Q2
+In a city with a regular ``chessboard'' street plan, the North-South streets are called 1st Street, 2nd
+Street, $\cdots$, 20th Street, and the East-West streets are called 1st Avenue, 2nd Avenue, $\cdots$,
+10th Avenue. What is the minimum number of blocks you have to walk to get from the corner of 1st Street
+and 1st Avenue to the corner of 20th Street and 10th Avenue? In how many ways can you get there
+walking this minimum number of blocks?\\
+\\
+This is Manhattan distance (also known as rectilinear distance, taxi cab metric, or city block distance)
+and can be calculated with $\left|x_1-x_2\right| + \left|y_1-y_2\right|$.
+Our starting point is $(1,1)$ and our ending point is $(20,10)$.
+The minimum number of blocks needed is $\left|1-20\right| + \left|1-10\right| = 28$.\\
+\\
+The number of ways to travel this distance can be expressed as a binomial coefficient.
+What are the number of $k$-subsets that can be formed from an $n$-set?
+Our $n$ is the number of minimum blocks required, $n = 28$.
+There are $\binom{28}{19} = \binom{28}{9}$ ways to choose 19 or 9 blocks out of 28 blocks.
+
+\item % Q3
+Provide a combinatorial argument to prove
+\begin{equation*}
+\sum_{k=0}^n \binom{n}{k} \binom{k}{m} = \binom{n}{m} 2^{n-m} % \sum\limits_{k=0}^n also works
+\end{equation*}
+Like any other combinatorial proofs, prove that the two different ways of counting are equivalent.\\
+
+Let $A$ be $m$-subsets from $k$-subsets.
+Let $B$ be $k$-subsets from the $n$-set.
+
+On the LHS we have
+\begin{equation*}
+\sum_{k=0}^n \binom{n}{k} \binom{k}{m} = \binom{n}{0}\binom{0}{m} + \binom{n}{1}\binom{1}{m} +
+\cdots + \binom{n}{n-1}\binom{n-1}{m} + \binom{n}{n}\binom{n}{m}
+\end{equation*}
+
+Each $\binom{n}{k} \binom{k}{m}$ counts the number of ways to choose $k$-subsets (B) from an $n$-set
+and then choose $m$-subsets (A) from those $k$-subsets.
+
+On the RHS we have
+\begin{equation*}
+\binom{n}{m} 2^{n-m}
+\end{equation*}
+
+We first choose an $m$-subset (A) from an $n$-set. There are $n \choose m$ ways to do this.
+Then we choose elements from B from subsets of the relative complement of $B$ in $A$
+($= A \setminus B = A - B$). There are $2^{|A-B|} = 2^{n-m}$ such subsets.\\
+
+On both sides we have counted the number of pairs of subsets $(A,B)$ or in other words,
+the number of pairs of $m$-subsets from a $k$-set and $k$-subsets from an $n$-set.
+
+\item % Q4
+Provide a combinatorial argument to prove
+\begin{eqnarray*}
+1 + \binom{n}{1}2 + \binom{n}{2}4 + \cdots + \binom{n}{n-1}2^{n-1} + \binom{n}{n}2^n = 3^n\\
+=\binom{n}{0}2^0 + \binom{n}{1}2^1 + \binom{n}{2}2^2 + \cdots + \binom{n}{n-1}2^{n-1} + \binom{n}{n}2^n
+= 3^n
+\end{eqnarray*}
+
+For example, on both the LHS and RHS we are counting the number of trinary strings of length $n$
+(i.e. all strings over $\{0,1,2\}$ with length $n$).\\
+
+RHS: Each digit in the string has 3 options (0, 1, or 2), and there are $n$ digits.
+So there are $3^n$ trinary strings of length $n$.
+
+LHS: Count the number of trinary strings of length $n$ by splitting them into partitions and
+summing all partitions. Partition the strings based on the number of 0's, 1's, or 2's in the string
+(they all yield the same result) into disjoint groups.
+For example, if we partition based on number of 0's in the strings,
+then we would have groups for strings with zero 0's, one 0, two 0's, three 0's, ... up to $n$ 0's.\\
+\\
+For example, if $n=3$ and we partition by number of 0's in a string.
+\begin{eqnarray*}
+\binom{3}{0}2^0 + \binom{3}{1}2^1 + \binom{3}{2}2^2 + \binom{3}{3}2^3\\
+&=& (1 \cdot 1) + (3 \cdot 2) + (3 \cdot 4) + (1 \cdot 8)\\
+&=& 1 + 6 + 12 + 8\\
+&=& 27 \mbox{ trinary strings of length 3}\\
+&=& 3^3
+\end{eqnarray*}
+Then there are 8 strings with zero 0's, 12 strings with one 0, 6 strings with two 0's, and 1 string
+with three 0's (similar if we were to partition based off 1's or 2's).
+Together, those are all the 27 possible trinary strings of length 3.
+
+\end{enumerate}
+\end{document}

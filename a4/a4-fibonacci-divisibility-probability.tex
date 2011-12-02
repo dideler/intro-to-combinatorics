@@ -1,0 +1,207 @@
+\documentclass[10pt,a4paper,final]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+\author{Dennis Ideler}
+\title{MATH 2P71: Intro to Combinatorics\\Assignment 4: Fibonacci and other stories}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item % Q1
+Prove the following identities using simultaneous induction:
+\begin{eqnarray}
+\binom{n}{0}F_0 + \binom{n}{1}F_1 + \binom{n}{2}F_2 + \cdots + \binom{n}{n}F_n = F_{2n}\\
+\binom{n}{0}F_1 + \binom{n}{1}F_2 + \binom{n}{2}F_3 + \cdots + \binom{n}{n}F_{n+1} = F_{2n+1}
+\end{eqnarray}
+\underline{Base case:}\\
+For $n=1$
+\begin{eqnarray}
+\setcounter{equation}{1}
+\binom{1}{0}F_0 + \binom{1}{1}F_1 = F_2 &\Rightarrow& (1)0 + (1)1 = 0+1 = 1 \: \checkmark\\
+\binom{1}{0}F_1 + \binom{1}{1}F_2 = F_3 &\Rightarrow& (1)1 + (1)1 = 1+1 = 2 \: \checkmark
+\end{eqnarray}
+\underline{Simultaneous Induction:}\\
+Assume both equalities true for $n$, then prove for one and use it and the induction hypothesis to prove
+the other equality (i.e. use equation 2 in the proof of equation 1, and vice-versa).\\
+\\
+Equation 4.3 (pg 69 in our textbook) tells us that $F_{2n} = F_{n+1}F_n + F_nF_{n-1} = F_{2n-1} + F_{2n-2}$.\\
+Thus $F_{2n+1} = F_{2n} + F_{2n-1}$, and from that we can derive $F_{2n} = F_{2n+1} - F_{2n-1}$.\\
+\\
+For equation 4.1 we use $F_{2n} = F_{2n+1} - F_{2n-1}$
+\begin{eqnarray*}
+&\binom{n}{0}F_0 + \binom{n}{1}F_1 + \binom{n}{2}F_2 + \cdots + \binom{n}{n}F_n \\ &=& \\
+&\binom{n}{0}F_1 + \binom{n}{1}F_2 + \binom{n}{2}F_3 + \cdots + \binom{n}{n}F_{n+1} \\ &-& \\
+&\binom{n-1}{0}F_0 + \binom{n-1}{1}F_1 + \binom{n-1}{2}F_2 + \cdots + \binom{n-1}{n-1}F_{n-1}
+\end{eqnarray*}
+For equation 4.2 we use $F_{2n+1} = F_{2n} + F_{2n-1}$
+\begin{eqnarray*}
+&\binom{n}{0}F_1 + \binom{n}{1}F_2 + \binom{n}{2}F_3 + \cdots + \binom{n}{n}F_{n+1} \\ &=& \\
+&\binom{n}{0}F_0 + \binom{n}{1}F_1 + \binom{n}{2}F_2 + \cdots + \binom{n}{n}F_n \\ &+& \\
+&\binom{n-1}{0}F_0 + \binom{n-1}{1}F_1 + \binom{n-1}{2}F_2 + \cdots + \binom{n-1}{n-1}F_{n-1}
+\end{eqnarray*}
+
+\item % Q2
+We flip a coin $n$ times ($n \geq 1$). For which values of $n$ are the following pairs of events independent?
+\begin{enumerate}
+\item The first coin flip was heads; the number of heads was even. \\
+\\
+Two events are independent if information about one event (whether or not it occurred)
+does not influence the probability of the other. Formally, two events $A$ and $B$
+are independent if $P(A \cap B) = P(A)P(B)$.\\
+Intuition tells me that the first flip being heads, likely has some influence on the number of heads,
+but not on the number of heads being even/odd.\\
+\\
+Let $A = $ first flip was heads, and $B = $ number of heads was even.\\
+$P(A) = \frac{1}{2}$ because a single coin flip has sample space $\{H,T\}$, both outcomes equally possible. \\
+$P(B) = \frac{1}{2}$ because $\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \binom{n}{3} + \cdots \binom{n}{k}= 0$, where $n$ is the number of flips and $k$ is the number of heads.
+Which can be rewritten as $\binom{n}{0} + \binom{n}{2} + \cdots = \binom{n}{1} + \binom{n}{3} + \cdots$
+to indicate that the cardinality of $B$ (the number of ways to get even heads, LHS) is equal to the
+cardinality of $\bar{B}$ (the number of ways to get odd heads, RHS).\\
+\\
+Event $A \cap B = $ set of outcomes such that the first coin was heads \emph{and} an odd number of
+heads for the remaining $n-1$ flips (so the total number of heads is even).\\
+$P(A \cap B) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$\\
+$P(A)P(B) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$\\
+$P(A \cap B) = P(A)P(B) \therefore$ independent for all $n \geq 2$.
+
+\item The first coin flip was heads; the number of heads was more than the number of tails. \\
+\\
+Intuition tells me that if the first flip is heads, then there will generally be more heads than tails
+(i.e. there is an influence).\\
+Let $A = $ first flip was heads, and $B = $ number of heads was more than number of tails.\\
+$P(A) = \frac{1}{2}$\\
+$P(B) = \cdots$ ?\\
+$n$ is not fixed, so determining the probability of $B$ is difficult.\\
+Instead, we prove by contradiction.\\
+The number of ways to have more heads than tails is
+\begin{equation*}
+|B| = \sum_{k \geq \lfloor \frac{n}{2} \rfloor + 1}^n \binom{n}{k}
+\end{equation*}
+where $n$ is the number of flips, and $k$ is the number of heads.
+For example, $n = 6$ coin flips, then $\binom{6}{4} + \binom{6}{5} + \binom{6}{6}$ ways to have more
+heads than tails.\\
+\\
+Event $A \cap B = $ set of outcomes such that first coin was heads \emph{and} number of heads
+was more than number of tails.\\
+\begin{equation*}
+|A \cap B| = \sum_{k \geq \lfloor \frac{n}{2} \rfloor + 1}^n \binom{n}{k-1}
+\end{equation*}
+$k-1$ heads because first flip was heads.\\
+\\
+Consider $\bar{A} = $ first flip was tails. $P(\bar{A}) = \frac{1}{2}$.\\
+Assume $A$ and $B$ are independent, then the pair $\bar{A}$ and $B$ must also be.\\
+\\
+Event $\bar{A} \cap B = $ set of outcomes such that first coin was tails \emph{and} number of heads
+was more than number of tails.\\
+\begin{equation*}
+|\bar{A} \cap B| = \sum_{k \geq \lfloor \frac{n}{2} \rfloor + 1}^n \binom{n}{k}
+\end{equation*}
+$|A \cap B| \neq |\bar{A} \cap B|$. Contradiction, there is a different number of ways to do
+a similar pair of events, which means there is some influence caused by the first event.
+$\therefore$ dependent for all $n \geq 1$.
+
+\item The number of heads was even; the number of heads was more than the number of tails. \\
+\\
+Let $A = $ number of heads was even, and $B =$ number of heads was more than the number of tails.
+Similar to 2c, it's too difficult to find probability $P(B)$ so we prove by contradiction. \\
+\\
+Event $A \cap B =$ set of outcomes such that there is an even number of heads \emph{and}
+there are more heads than tails. \\
+\\
+Let $\bar{A} =$ number of heads was odd.
+Assume $A$ and $B$ are independent, then so must be $\bar{A}$ and $B$
+(i.e. $|A \cap B| = |\bar{A} \cap B|$).\\
+
+As in 2a
+\begin{equation*}
+|A| = \binom{n}{0} + \binom{n}{2} + \cdots
+\end{equation*}
+As in 2b
+\begin{equation*}
+|B| = \sum_{k \geq \lfloor \frac{n}{2} \rfloor + 1}^n \binom{n}{k}
+\end{equation*}
+So it follows that
+\begin{eqnarray*}
+|A \cap B| = \sum_{k \geq \lfloor \frac{n}{2} \rfloor + 1}^n \binom{n}{k} \: \mbox{,where $k$ is even}\\
+|\bar{A} \cap B| = \sum_{k \geq \lfloor \frac{n}{2} \rfloor + 1}^n \binom{n}{k} \: \mbox{,where $k$ is odd}
+\end{eqnarray*}
+If $k$ is even
+\begin{eqnarray*}
+|A \cap B| = \binom{n}{k} + \binom{n}{k+2} + \cdots \\
+|\bar{A} \cap B| = \binom{n}{k+1} +\binom{n}{k+3} + \cdots
+\end{eqnarray*}
+And so it follows that $|A \cap B| \geq |\bar{A} \cap B|$.\\
+For example
+\begin{eqnarray*}
+n = 1, & &\binom{1}{0} = \binom{1}{1}, A \cap B = \mbox{false}\\
+n = 2, & &\binom{2}{0} + \binom{2}{2} > \binom{2}{1}, A \cap B = \mbox{true}\\
+n = 3, & &\binom{3}{0} + \binom{3}{2} = \binom{3}{1} + \binom{3}{3}, A \cap B = \mbox{false}\\
+n = 4, & &\binom{4}{0} + \binom{4}{2} + \binom{4}{4} > \binom{4}{1} + \binom{4}{3}, A \cap B = \mbox{true}\\
+n = 5, & &\binom{5}{0} + \binom{5}{2} + \binom{5}{4} = \binom{5}{1} + \binom{5}{3} + \binom{5}{5}, A \cap B = \mbox{false}\\
+\vdots
+\end{eqnarray*}
+$\therefore |A \cap B| \neq |\bar{A} \cap B|$, independent for all $n \geq 1$.
+\end{enumerate}
+
+\item % Q3
+Prove that every prime larger than 3 gives a remainder of 1 or 5 if divided by 6. \\
+\\
+$b = qa + r$, if $0 \leq r < a$, where $r$ is remainder and $q$ is quotient of $b/a$. \\
+\\
+Check if true for some primes greater than 3.\\
+\begin{eqnarray*}
+5 | 6 &\Rightarrow& 5 = (0)(6) + 5 \mbox{, where $q = 0$, $a = 6$, $r = 5$}\\
+7 | 6 &\Rightarrow& 7 = (1)(6) + 1\\
+11 | 6 &\Rightarrow& 11 = (1)(6) + 5\\
+13 | 6 &\Rightarrow& 13 = (2)(6) + 1
+\end{eqnarray*}
+True so far. Prove for \emph{all} primes greater than 3.\\
+$P \subseteq N^0$, and $N$ can be split into even numbers and odd numbers.\\
+If $b$ is even, $b|6 \Rightarrow r = \{0,2,4\}$ because $b$ mod $6 = \{0,2,4\}$ with even $b$.\\
+If $b$ is odd, $b|6 \Rightarrow r = \{1,3,5\}$ because $b$ mod $6 = \{1,3,5\}$ with odd $b$.\\
+Thus for any $n,\: n|6 \Rightarrow r =\{0,1,2,3,4,5\}$.\\
+\\
+But no even numbers in set of primes (they are multiples of 2), so $\{0,2,4\}$ is excluded from $r$.
+We start at primes larger than 3, so we know 3 is not in $r$ because no multiples of 3 are in 
+our defined set of primes.\\
+$\therefore$ we are left with $r = \{1,5\}$ which proves the original statement.
+
+\item % Q4
+We are given $n+1$ numbers from the set $S = \{1, 2, \cdots, 2n\}$.
+Prove that there are two numbers among them such that one divides the other. \\
+\\
+Each integer (in $S$) can be written as an odd multiple of a power of 2.\\
+For example
+\begin{eqnarray*}
+1 = 1 \times 2^0 \\
+2 = 1 \times 2^1 \\
+3 = 3 \times 2^0 \\
+4 = 1 \times 2^2 \\
+5 = 5 \times 2^0 \\
+\vdots
+\end{eqnarray*}
+Can write this in the general form: $a2^b$, where $a$ is an odd number from $S$
+(i.e. $a = \{1,3,5,\cdots,2n-1\}$, and $b \geq 0$. Thus there are $n$ odd numbers for $a$.\\
+\\
+From the examples above we see that numbers with the same ``box'' (i.e. same value for $a$)
+are divisible by another. We can remove the powers of 2 from each integer to focus on the boxes
+and apply the Pigeonhole Principle (PP).\\
+\\
+PP states that for $n$ items and $m$ boxes, at least one box will contain $\lceil \frac{n}{m} \rceil$
+items.\\
+In this case, there are $n+1$ numbers (items) and $n$ values for $a$ (boxes)
+$\Rightarrow \lceil \frac{n+1}{n} \rceil = 2$ for $n \geq 1$.
+So at least one box (odd number in $S$) is being used twice in the representation $a2^b$.\\
+$\therefore$ there are two numbers among them such that one divides the other.\\
+\\
+Alternatively (but probably not as good a proof), it was stated that $S$ contains $\{1,2\}$, and $1|2$ 
+so there are two numbers such that one divides the other.
+\end{enumerate}
+\end{document}
