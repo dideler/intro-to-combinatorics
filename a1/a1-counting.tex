@@ -80,16 +80,6 @@ their sum in the binary notation. Check the results
 against adding 25 and 35 in the usual decimal notation
 and then converting it to binary.\\
 \\
-%\begin{equation*}
-%\begin{array}{rc@{}c}
-%& \multicolumn{2}{l}{\, \, \, 1+\frac{1}{2}x^2 +\frac{5}{24}x^4-\dotsb} \vspace*{0.12cm} \\ \cline{2-3}
-%\multicolumn{1}{r}{1-\frac{1}{2!}x^2+\frac{1}{4!}x^4-\dotsb \hspace*{-4.8pt}} & \multicolumn{1}{l}{ \hspace*{-5.6pt} \Big) \hspace*{4.6pt} 1} \\
-%& \multicolumn{2}{l}{\, \, \, 1-\frac{1}{2!}x^2+\frac{1}{4!}x^4-\dotsb} \vspace*{0.12cm} \\ \cline{2-3}
-%& \multicolumn{2}{l}{\, \, \, \phantom{1{}-{}} \frac{1}{2!}x^2-\frac{1}{4!}x^4+\dotsb} \\
-%& \multicolumn{2}{l}{\, \, \, \phantom{1{}-{}} \frac{1}{2!}x^2-\frac{1}{\left(2!\right)^2}x^4+\dotsb} \vspace*{0.12cm} \\ \cline{2-3}
-%& \multicolumn{2}{l}{\, \, \, \phantom{1{}-{}\frac{1}{2!}x^2{}-{}} \frac{5}{24}x^4-\dotsb}
-%\end{array}
-%\end{equation*}
 \begin{tabular}{l | l}
 \cline{1-1}
 $25$\\
@@ -127,10 +117,10 @@ and $25 + 35 = 60$.
 \item % Q4
 Find the number of all 20-digit integers in which no two consecutive digits are the same.\\
 \\
-The first digit has $10$ options (0-9).
+The first digit has 9 options (1-9), starting with 0 is not allowed.
 To ensure that any other digit is not the same as its previous digit,
 each of the remaining 19 digits can only have $9$ options.
-Thus there are $10 \times 9^{19}$ possible numbers.
+Thus there are $9 \times 9^{19} = 9^{20}$ possible 20-digit integers.
 
 \item % Q5
 (a) There are 10 distinct elements in a single pile.
