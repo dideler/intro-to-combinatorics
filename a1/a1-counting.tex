@@ -221,16 +221,30 @@ $\therefore \binom{n}{k} = \binom{n-2}{k} + 2 \binom{n-2}{k-1} + \binom{n-2}{k-2
 20 persons are sitting around a table.
 How many ways can we choose 3 persons, no two of whom are neighbours?\\
 \\
-First person has 20 options. Once the first person is chosen,
-3 options for the next person have been eliminated (the first person plus their two neighbours).
-Second person has 17 options. The number of choices the third person has depends
-on where the second person sits.
-Worst case: second person is two seats away from the first person,
-thus only 2 options are eliminated (person 1 and 2 share a neighbour)
-$\Rightarrow$ third person has 15 options.
-Best case: second person is more than two seats away from the first person, thus 3 options
-are eliminated (person 1 and 2 do not share a neighbour) $\Rightarrow$ third person has 14 options.
-Best case has $20 \times 17 \times 14$ ways, worst case has $20 \times 17 \times 15$ ways.
-In total, by rule of summation, there are $(20 \times 17 \times 15)+(20 \times 17 \times 14)$ ways.
+First person (P1) has 20 options. \\
+Second person (P2), there are 2 cases:
+\begin{enumerate}
+\item P2 sits 1 seat away from P1 $\Rightarrow$ 2 options
+\item P2 sits more than 1 seat away from P1 $\Rightarrow$ 20 spots $-$ 5 illegal spots $=15$ options
+\end{enumerate}
+Third person (P3), there are 2 cases:
+\begin{enumerate}
+\item P2 sits 1 seat away from P1 $\Rightarrow$ 20 spots $-$ 5 illegal spots $=15$ options
+\item P2 sits more than 1 seat away from P1 $\Rightarrow$ 20 spots $-$ 6 illegal spots $=14$ options
+\end{enumerate}
+
+Using the summation and product rule, we get
+\begin{equation*}
+(20 \times 2 \times 15)+(20 \times 15 \times 14)
+\end{equation*}
+
+Hold on, we're overcounting! The order of choosing the 3 persons does not matter,
+yet we're counting it in our selection (i.e. we're counting the permutations without repetition,
+the number of choices in our ordered combination is being reduced with each selection).
+So the answer is really:
+\begin{equation*}
+\frac{(20 \times 2 \times 15)+(20 \times 15 \times 14)}{3!}
+\end{equation*}
+
 \end{enumerate}
 \end{document}
